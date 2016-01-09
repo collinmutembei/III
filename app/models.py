@@ -14,3 +14,16 @@ class Bucketlist(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Item(models.Model):
+    """Items model"""
+
+    name = models.CharField(blank=False, max_length=45)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
+    done = models.BooleanField(default=True)
+    bucketlist_id = models.ForeignKey(Bucketlist)
+
+    def __str__(self):
+        return self.name
