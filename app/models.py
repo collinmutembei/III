@@ -23,7 +23,7 @@ class Item(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     done = models.BooleanField(default=True)
-    bucketlist_id = models.ForeignKey(Bucketlist)
+    parent_bucketlist = models.ForeignKey(Bucketlist, related_name="items")
 
     def __str__(self):
         return self.name
