@@ -20,4 +20,5 @@ router.register(r'items', viewsets.ItemViewset)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^auth/login/', 'rest_framework_jwt.views.obtain_jwt_token'),
 ]
