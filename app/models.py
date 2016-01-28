@@ -10,7 +10,7 @@ class Bucketlist(models.Model):
     name = models.CharField(blank=False, max_length=45)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(User)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -22,8 +22,12 @@ class Item(models.Model):
     name = models.CharField(blank=False, max_length=45)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    done = models.BooleanField(default=True)
-    parent_bucketlist = models.ForeignKey(Bucketlist, related_name="items")
+    done = models.BooleanField(default=False)
+    parent_bucketlist = models.ForeignKey(
+        Bucketlist,
+        on_delete=models.CASCADE,
+        related_name="items"
+    )
 
     def __str__(self):
         return self.name

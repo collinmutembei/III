@@ -9,16 +9,14 @@ router = ExtendedSimpleRouter()
     .register(
         r'items',
         viewsets.ItemViewset,
-        base_name='bucketlist-items',
+        base_name='bucketlists-item',
         parents_query_lookups=['parent_bucketlist']
         )
-
 )
-
-router.register(r'items', viewsets.ItemViewset)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^api', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
+    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^auth/login/', 'rest_framework_jwt.views.obtain_jwt_token'),
 ]
