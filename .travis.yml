@@ -6,7 +6,8 @@ install: pip install -r requirements.txt
 env:
   global:
     - TRAVIS_BUILD=true
-script: python manage.py test
+script:
+    - coverage run --source=app --omit="*virtualenv*","*envs*","migrations/*","app/__init__.py" manage.py test
 branches:
   only:
       - master
