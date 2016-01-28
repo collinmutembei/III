@@ -7,7 +7,7 @@ env:
   global:
     - TRAVIS_BUILD=true
 script:
-    - coverage run --source=app --omit="*virtualenv*","*envs*","migrations/*","app/__init__.py" manage.py test
+    - coverage run manage.py test
 branches:
   only:
       - master
