@@ -2,8 +2,8 @@
 [![Coverage Status](https://coveralls.io/repos/andela-cmutembei/III/badge.svg?branch=develop&service=github)](https://coveralls.io/github/andela-cmutembei/III?branch=develop)
 [![Code Issues](https://www.quantifiedcode.com/api/v1/project/f3b027bfc00949219f46c6aa0cf5da3a/snapshot/origin:develop:HEAD/badge.svg)](https://www.quantifiedcode.com/app/project/f3b027bfc00949219f46c6aa0cf5da3a)
 
-## BLST
-BLST is a RESTful API service for managing bucket lists and their constituent items. It is built using Flask and uses JSON objects for information interchange.
+## [BLST](http://blst-api.herokuapp.com/)
+BLST is a RESTful API service for managing bucket lists and their constituent items. It is built using [Django](https://www.djangoproject.com/) and [Django Rest Framework](http://www.django-rest-framework.org/) and uses JSON objects for information interchange.
 
 #### Project requirements
 - [Python](https://www.python.org/downloads/)
@@ -29,5 +29,11 @@ $ workon III-env
 #### Running tests
 To run unit tests for blst
 ```shell
-(bucketlist-env)$ python manage.py test
+(III-env)$ python manage.py test
 ```
+#### License
+
+This project is licensed under the terms of the [MIT license.](https://github.com/andela-cmutembei/III/blob/develop/LICENSE)
+
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://blst-api.herokuapp.com/)
+[![forthebadge](http://forthebadge.com/images/badges/powered-by-oxygen.svg)](http://blst-api.herokuapp.com/)
