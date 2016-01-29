@@ -17,7 +17,6 @@ class BucketlistViewset(NestedViewSetMixin, viewsets.ModelViewSet):
         user = self.request.user
         if user.is_active:
             return Bucketlist.objects.filter(created_by=user.id)
-        return Bucketlist.objects.all()
 
 
 class ItemViewset(NestedViewSetMixin, viewsets.ModelViewSet):

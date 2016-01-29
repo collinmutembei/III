@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase, APIClient
 from django.contrib.auth.models import User
-
+from app.models import Bucketlist, Item
 
 class APIResourcesTestCase(APITestCase):
 
@@ -32,6 +32,8 @@ class APIResourcesTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data['name'], 'test bucketlist')
+        created_bucketlist = Bucketlist.objects.filter(name='test bucketlist')
+        print("{0} created".format(created_bucketlist.__str__()))
 
         bucketlist_id = response.data['id']
 
@@ -65,6 +67,9 @@ class APIResourcesTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.data['name'], 'test item')
+
+        created_item = Item.objects.filter(name='test item')
+        print("{0} created".format(created_item.__str__()))
 
         item_id = response.data['id']
 
