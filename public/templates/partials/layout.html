@@ -1,0 +1,22 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html ng-app='blstApp'>
+    <head>
+        <meta charset="utf-8">
+        <title>BLST</title>
+        <link rel='shortcut icon' href="{% static 'images/logo.png' %}" type='image/x-icon' />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{% static 'styles/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'styles/style.css' %}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+        {% block content %}
+
+        {% endblock %}
+        <script type="text/javascript" src="{% static 'scripts/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/materialize.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/angular.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/app.js' %}"></script>
+    </body>
+</html>
