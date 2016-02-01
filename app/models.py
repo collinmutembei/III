@@ -13,7 +13,7 @@ class Bucketlist(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return "{0} - {1}".format(self.id, self.name)
 
 
 class Item(models.Model):
@@ -30,4 +30,4 @@ class Item(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return "{0} - {1}".format(self.id, self.name)

@@ -10,6 +10,5 @@ def root_route(request, format=None):
         'bucketlists': reverse('bucketlist-list', request=request, format=format),
     })
 
-
 def index(request):
     return render(request, 'blst/landing.html')
