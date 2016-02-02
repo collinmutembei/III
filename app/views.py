@@ -21,3 +21,7 @@ def custom_404(request):
 
 def landing(request):
     return render(request, 'landing.html')
+
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
