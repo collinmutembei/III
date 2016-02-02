@@ -1,0 +1,14 @@
+.btn-join {
+    background: transparent;
+    border: 1px solid #2196f3;
+    margin-top: 15px;
+    font-size: 100%;
+}
+
+.navbar-brand {
+    margin-top: 15px;
+}
+
+.app_background {
+  background: url(../images/bgpattern1.png) repeat center center fixed;
+}

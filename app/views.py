@@ -7,8 +7,17 @@ from django.shortcuts import render
 @api_view(('GET',))
 def root_route(request, format=None):
     return Response({
-        'bucketlists': reverse('bucketlist-list', request=request, format=format),
+        'bucketlists': reverse(
+            'bucketlist-list',
+            request=request,
+            format=format
+        ),
     })
 
-def index(request):
-    return render(request, 'blst/landing.html')
+
+def custom_404(request):
+    return render(request, '404.html')
+
+
+def landing(request):
+    return render(request, 'landing.html')
