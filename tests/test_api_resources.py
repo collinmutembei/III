@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase, APIClient
 from django.contrib.auth.models import User
-from app.models import Bucketlist, Item
+from api.models import Bucketlist, Item
 
 class APIResourcesTestCase(APITestCase):
 

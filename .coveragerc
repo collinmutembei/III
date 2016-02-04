@@ -3,7 +3,7 @@
 omit =
     *virtualenv*
     *envs*
-    *app/migrations/*
+    *api/migrations/*
     */python?.?/*
     *__init__*
     */tests/*

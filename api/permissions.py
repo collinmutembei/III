@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from app.models import Item
+from api.models import Item
 
 
 class IsOwner(permissions.BasePermission):

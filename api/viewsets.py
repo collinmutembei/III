@@ -1,8 +1,8 @@
 from rest_framework import viewsets, permissions
 from rest_framework_extensions.mixins import NestedViewSetMixin
-from app.models import Bucketlist, Item
-from app.permissions import IsOwner
-from app.serializers import BucketlistSerializer, ItemSerializer
+from api.models import Bucketlist, Item
+from api.permissions import IsOwner
+from api.serializers import BucketlistSerializer, ItemSerializer
 
 
 class BucketlistViewset(NestedViewSetMixin, viewsets.ModelViewSet):

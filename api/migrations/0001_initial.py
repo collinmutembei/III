@@ -29,8 +29,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=45)),
                 ('date_created', models.DateTimeField(auto_now_add=True)),
                 ('date_modified', models.DateTimeField(auto_now=True)),
-                ('done', models.BooleanField(default=True)),
-                ('parent_bucketlist', models.ForeignKey(related_name='items', to='app.Bucketlist')),
+                ('done', models.BooleanField(default=False)),
+                ('parent_bucketlist', models.ForeignKey(related_name='items', to='api.Bucketlist')),
             ],
         ),
     ]

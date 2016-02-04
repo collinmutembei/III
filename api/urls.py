@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework_extensions.routers import ExtendedSimpleRouter
-from app import viewsets
-from app.views import root_route, landing, dashboard
+from api import viewsets
+from api.views import root_route, landing, dashboard
 
 router = ExtendedSimpleRouter()
 
@@ -25,4 +25,4 @@ urlpatterns = [
     url(r'^docs/', include('rest_framework_swagger.urls')),
 ]
 
-url.handler404 = 'app.views.custom_404'
+url.handler404 = 'api.views.custom_404'

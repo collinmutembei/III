@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Bucketlist, Item
+from api.models import Bucketlist, Item
 
 
 admin.site.register(Bucketlist)

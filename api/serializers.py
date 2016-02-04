@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.models import Bucketlist, Item
+from api.models import Bucketlist, Item
 
 
 date_created = serializers.DateTimeField()
