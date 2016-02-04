@@ -9,6 +9,106 @@
     margin-top: 15px;
 }
 
+.navbar-header img {
+    margin: 12px 0 10px 10px;
+}
 .app_background {
-  background: url(../images/bgpattern1.png) repeat center center fixed;
+    background: url(../images/bgpattern.png) repeat center center fixed;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+.card-container {
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    -o-perspective: 800px;
+    perspective: 800px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.card-container:not(.manual-flip):hover .card,
+.card-container.hover.manual-flip .card{
+    -webkit-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
+    -o-transform: rotateY( 180deg );
+    transform: rotateY( 180deg );
+}
+
+.card {
+    -webkit-transition: -webkit-transform .5s;
+    -moz-transition: -moz-transform .5s;
+    -o-transition: -o-transform .5s;
+    transition: transform .5s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #FFF;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
+}
+
+.front {
+    z-index: 2;
+}
+
+.back {
+    -webkit-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
+    -o-transform: rotateY( 180deg );
+    transform: rotateY( 180deg );
+    z-index: 3;
+}
+
+.card-container, .front, .back {
+    width: 100%;
+    height: 320px;
+    border-radius: 4px;
+}
+.card .cover{
+    height: 105px;
+    overflow: hidden;
+    border-radius: 4px 4px 0 0;
+}
+.card .cover img{
+    width: 100%;
+}
+
+.card .footer {
+    border-top: 1px solid #EEEEEE;
+    color: #999999;
+    margin: 30px 0 0;
+    padding: 10px 0 0;
+    text-align: center;
+    border-radius: 0 0 4px 4px ;
+}
+
+.card .header {
+    padding: 15px 20px;
+    height: 90px;
+}
+.card .motto{
+    border-bottom: 1px solid #EEEEEE;
+    color: #999999;
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 10px;
+    text-align: center;
 }

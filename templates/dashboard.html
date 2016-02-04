@@ -1,59 +1,44 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card-panel">
-                <span class="blue-text text-darken-2">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card-panel teal">
-                <span class="white-text">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card-panel">
-                <span class="blue-text text-darken-2">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</span>
-            </div>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <img alt="Brand" height="25" src="{% static 'images/logo.png' %}">
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card-panel">
-                <span class="blue-text text-darken-2">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card-panel teal">
-                <span class="white-text">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula.</span>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card-wrapper">
-                <div class="card effect__click">
-                    <div class="face card__front z-depth-2">
-                        <span>Front</span>
-                        <div class="avatar">
-                            <img src="http://mdbootstrap.com/wp-content/uploads/2015/10/team-avatar-2.jpg" class="img-circle img-responsive"/>
+</nav>
+<div class="container">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card-container manual-flip">
+            <div class="card">
+                <div class="front">
+                    <div class="front">
+                        <div class="cover">
+                            <img src="{% static 'images/cover.png' %}" alt="cover-photo"/>
                         </div>
-                        <a><i class="fa fa-repeat"> Click on card to rotate</i></a>
+                        <div class="footer">
+                            <button class="btn btn-simple" onclick="rotateCard(this)">
+                                <i class="fa fa-tasks"></i> view items
+                            </button>
+                        </div>
                     </div>
-                    <div class="face card__back z-depth-2">
-                        <span>Back</span>
-                        <ol>
-                            <li>One</li>
-                            <li>Two</li>
-                            <li>Three</li>
-                        </ol>
-                        <a><i class="fa fa-repeat"> Click on card to rotate</i></a>
+                </div>
+                <div class="back">
+                    <div class="header">
+                        <h5 class="motto">Bucketlist items</h5>
                     </div>
+                    <div class="footer">
+                        <button class="btn btn-simple" onclick="rotateCard(this)" data-original-title="Flip Card">
+                            <i class="fa fa-share"></i> Back
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 {% endblock %}
