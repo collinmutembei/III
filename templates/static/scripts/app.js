@@ -8,3 +8,8 @@ function rotateCard(btn){
         $card.addClass('hover');
     }
 }
+
+/* Initialize Digits for Web using your application's consumer key that Fabric generated */
+document.getElementById('digits-sdk').onload = function() {
+  Digits.init({ consumerKey: 'yourConsumerKey' });
+};
