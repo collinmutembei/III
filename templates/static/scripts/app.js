@@ -9,7 +9,15 @@ function rotateCard(btn){
     }
 }
 
-/* Initialize Digits for Web using your application's consumer key that Fabric generated */
-document.getElementById('digits-sdk').onload = function() {
-  Digits.init({ consumerKey: 'yourConsumerKey' });
-};
+$(document).ready(function() {
+    $.fn.editable.defaults.mode = 'inline';
+    
+    $('#title').editable({
+        toggle:'manual'
+    });
+
+    $('.edit-title').click(function(e){
+        e.stopPropagation();
+        $('#title').editable('toggle');
+    });
+});

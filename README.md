@@ -32,6 +32,7 @@ To run unit tests for blst
 (III-env)$ python manage.py test
 ```
 #### License
+Copyright (c) 2016 - Collin Mutembei
 
 This project is licensed under the terms of the [MIT license.](https://github.com/andela-cmutembei/III/blob/develop/LICENSE)
 

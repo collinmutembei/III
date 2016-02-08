@@ -1,6 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Chelsea+Market);
+
 .btn-join {
     background: transparent;
-    border: 1px solid #2196f3;
+    border: 1px solid #536DFE;;
     margin-top: 20px;
     font-size: 100%;
 }
@@ -89,22 +91,31 @@
     border-radius: 4px;
 }
 .card .cover{
-    height: 105px;
+    height: 200px;
     overflow: hidden;
     border-radius: 4px 4px 0 0;
 }
 .card .cover img{
     width: 100%;
+    position:relative;
+}
+.card .cover button{
+     position:absolute;
+     top:20px;
+     right: 10px;
+     display:block;
+     z-index:2;
 }
 
 .card .footer {
     border-top: 1px solid #EEEEEE;
-    color: #999999;
     margin: 30px 0 0;
     padding: 10px 0 0;
     text-align: center;
     border-radius: 0 0 4px 4px ;
 }
+
+
 
 .card .header {
     padding: 15px 20px;
@@ -117,4 +128,16 @@
     font-weight: 400;
     padding-bottom: 10px;
     text-align: center;
+}
+
+.back table {
+    width: 100%;
+    top:-25px;
+}
+
+.bucketlist-title {
+    margin-top: 10px 5px 0 5px;
+    font-family: 'Chelsea Market', cursive;
+    font-size: 20px;
+    word-wrap: break-word
 }
