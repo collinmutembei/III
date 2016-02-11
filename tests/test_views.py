@@ -10,8 +10,6 @@ class APIViewTestCase(TestCase):
     def test_dashboard_view(self):
         resp = self.client.get('/dashboard/')
         self.assertEqual(resp.status_code, 200)
-        self.assertContains(resp, 'random title')
-        self.assertContains(resp, 'Items')
 
     def test_inexistent_view(self):
         resp = self.client.get('/kjgduyv/')

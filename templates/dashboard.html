@@ -11,27 +11,33 @@
     </div>
 </nav>
 <div class="container">
-    <div class="col-xs-12 col-sm-6 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="bucketlist in bucketlists">
         <div class="card-container manual-flip">
             <div class="card">
                 <div class="front">
                     <div class="cover">
-                        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+                        {% verbatim %}
+                        <button id="{{ bucketlist.id }}" class="mdl-button mdl-js-button mdl-button--icon">
                             <i class="material-icons">more_vert</i>
                         </button>
-                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="{{ bucketlist.id }}">
                             <li class="mdl-menu__item editable editable-click edit-title">Edit</li>
                             <li class="mdl-menu__item">Share</li>
                             <li class="mdl-menu__item">Delete</li>
                         </ul>
+                        {% endverbatim %}
                         <img src="{% static 'images/header-image.jpeg' %}" alt="cover-photo"/>
                     </div>
                     <div class="bucketlist-title text-center">
-                        <span id="title" data-type="text">random title</span>
+                        {% verbatim %}
+                        <span id="title" data-pk="{{ bucketlist.id }}">{{ bucketlist.name }}</span>
+                        {% endverbatim %}
                     </div>
                     <div class="footer">
                         <button class="btn btn-simple" onclick="rotateCard(this)">
-                            Items <span class="badge">2</span>
+                            {% verbatim %}
+                            Items <span class="badge">{{ bucketlist.items.length }}</span>
+                            {% endverbatim %}
                         </button>
                     </div>
                 </div>
@@ -39,24 +45,25 @@
                     <div class="header">
                         <h5 class="motto">Bucketlist items</h5>
                     </div>
-                    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table-fixed">
-                        <thead>
-                            <tr>
-                                <th class="mdl-data-table__cell--non-numeric">Name</th>
-                                <th>Last modified</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">Item 1</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td class="mdl-data-table__cell--non-numeric">Item 2</td>
-                                <td>2</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="mdl-grid">
+                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                            <thead>
+                                <tr>
+                                    <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                    <th>Last modified</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in bucketlist.items">
+                                    {% verbatim %}
+                                    <span am-time-ago="item.date_modified"></span>
+                                    <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
+                                    <td class="mdl-data-table__cell--non-numeric">{{ item.date_modified | amCalendar }}</td>
+                                    {% endverbatim %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="footer">
                         <button class="btn btn-simple" onclick="rotateCard(this)" data-original-title="Flip Card">
                             <i class="fa fa-share"></i> Back

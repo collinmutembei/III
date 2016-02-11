@@ -1,4 +1,4 @@
-angular.module('blstApp', []);
+angular.module('blstApp', ['ngResource', 'angularMoment']);
 
 function rotateCard(btn){
     var $card = $(btn).closest('.card-container');
@@ -11,8 +11,11 @@ function rotateCard(btn){
 
 $(document).ready(function() {
     $.fn.editable.defaults.mode = 'inline';
-    
+    $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
     $('#title').editable({
+        type: 'text',
+        url: '/api/bucketlists/',
         toggle:'manual'
     });
 
