@@ -3,24 +3,24 @@
 {% load staticfiles %}
 
 {% block content %}
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <img alt="Brand" height="40" src="{% static 'images/logo.png' %}">
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container scrollable">
     <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="bucketlist in bucketlists">
         <div class="card-container manual-flip">
             <div class="card">
                 <div class="front">
                     <div class="cover">
                         {% verbatim %}
-                        <button id="{{ bucketlist.id }}" class="mdl-button mdl-js-button mdl-button--icon">
+                        <button id="{{$index}}" class="mdl-button mdl-js-button mdl-button--icon">
                             <i class="material-icons">more_vert</i>
                         </button>
-                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="{{ bucketlist.id }}">
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="{{$index}}">
                             <li class="mdl-menu__item editable editable-click edit-title">Edit</li>
                             <li class="mdl-menu__item">Share</li>
                             <li class="mdl-menu__item">Delete</li>
@@ -43,33 +43,40 @@
                 </div>
                 <div class="back">
                     <div class="header">
-                        <h5 class="motto">Bucketlist items</h5>
+                        <h5 class="items-title">Bucketlist items</h5>
                     </div>
-                    <div class="mdl-grid">
-                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-                            <thead>
-                                <tr>
-                                    <th class="mdl-data-table__cell--non-numeric">Name</th>
-                                    <th>Last modified</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="item in bucketlist.items">
-                                    {% verbatim %}
-                                    <span am-time-ago="item.date_modified"></span>
-                                    <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
-                                    <td class="mdl-data-table__cell--non-numeric">{{ item.date_modified | amCalendar }}</td>
-                                    {% endverbatim %}
-                                </tr>
-                            </tbody>
-                        </table>
+                    {% verbatim %}
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#incomplete{{$index}}" data-toggle="tab">incomplete</a></li>
+                            <li role="presentation"><a href="#complete{{$index}}" data-toggle="tab">complete</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active in" id="incomplete{{$index}}">
+                                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-fixed">
+                                    <thead>
+                                        <tr>
+                                            <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                            <th>Last modified</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="scrollable">
+                                        <tr ng-repeat="item in bucketlist.items">
+                                            <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
+                                            <td >{{ item.date_modified | amCalendar }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="complete{{$index}}"></div>
+                        </div>
                     </div>
+                    {% endverbatim %}
                     <div class="footer">
                         <button class="btn btn-simple" onclick="rotateCard(this)" data-original-title="Flip Card">
                             <i class="fa fa-share"></i> Back
                         </button>
                     </div>
-
                 </div>
             </div>
         </div>

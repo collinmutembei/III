@@ -15,7 +15,7 @@ The API documentation can be found [here](https://blst-api.herokuapp.com/docs)
 #### Installation
 To run blst locally configure [environment variables](https://github.com/andela-cmutembei/III/wiki) and do the following:
 ```shell
-$ git clone https://github.com/andela-cmutembei/III.git && cd $_
+$ git clone https://github.com/andela-cmutembei/III.git && cd III
 
 $ workon III-env
 
@@ -32,7 +32,7 @@ To run unit tests for blst
 (III-env)$ python manage.py test
 ```
 #### License
-Copyright (c) 2016 - Collin Mutembei
+Copyright &copy; 2016 - Collin Mutembei
 
 This project is licensed under the terms of the [MIT license.](https://github.com/andela-cmutembei/III/blob/develop/LICENSE)
 
