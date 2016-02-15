@@ -33,4 +33,12 @@ class Migration(migrations.Migration):
                 ('parent_bucketlist', models.ForeignKey(related_name='items', to='api.Bucketlist')),
             ],
         ),
+        migrations.CreateModel(
+            name='UserProfile',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('avatar', models.TextField()),
+                ('user', models.OneToOneField(related_name='profile', to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
     ]
