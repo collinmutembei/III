@@ -22,11 +22,15 @@ def custom_404(request):
 
 
 def landing(request):
+    if request.user.is_authenticated():
+        return render(request, 'dashboard.html')
     return render(request, 'landing.html')
 
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    if request.user.is_authenticated():
+        return render(request, 'dashboard.html')
+    return HttpResponseRedirect("/")
 
 
 def logout(request):
