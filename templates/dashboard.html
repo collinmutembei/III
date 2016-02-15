@@ -69,16 +69,29 @@
                                         </tr>
                                     </thead>
                                     <tbody class="scrollable">
-                                        <tr ng-repeat="item in bucketlist.items">
-                                            <div ng-if="item.done">
-                                                <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
-                                                <td >{{ item.date_modified | amCalendar }}</td>
-                                            </div>
+                                        <tr ng-repeat="item in bucketlist.items | filter : item.done === true">
+                                            <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
+                                            <td >{{ item.date_modified | amCalendar }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane" id="complete{{$index}}"></div>
+                            <div class="tab-pane" id="complete{{$index}}">
+                                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-fixed">
+                                    <thead>
+                                        <tr>
+                                            <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                            <th>Last modified</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="scrollable">
+                                        <tr ng-repeat="item in bucketlist.items | filter : item.done !== true">
+                                            <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
+                                            <td >{{ item.date_modified | amCalendar }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     {% endverbatim %}
