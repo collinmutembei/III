@@ -25,6 +25,9 @@ $ workon III-env
 
 (III-env)$ python manage.py runserver
 ```
+Alternatively, you can deploy your own instance of BLST on [Heroku](https;//dashboard.heroku.com)
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/andela-cmutembei/III/tree/develop)
 
 #### Running tests
 To run unit tests for blst
@@ -35,6 +38,3 @@ To run unit tests for blst
 Copyright &copy; 2016 - Collin Mutembei
 
 This project is licensed under the terms of the [MIT license.](https://github.com/andela-cmutembei/III/blob/develop/LICENSE)
-
-[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://blst-api.herokuapp.com/)
-[![forthebadge](http://forthebadge.com/images/badges/powered-by-oxygen.svg)](http://blst-api.herokuapp.com/)
