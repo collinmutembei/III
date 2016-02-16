@@ -1,5 +1,12 @@
 angular.module('blstApp', ['ngResource', 'angularMoment']);
 
+angular.module('blstApp').config(function($httpProvider) {
+
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+});
+
 function rotateCard(btn){
     var $card = $(btn).closest('.card-container');
     if($card.hasClass('hover')){

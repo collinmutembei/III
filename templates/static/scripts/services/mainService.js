@@ -4,6 +4,9 @@ angular.module('blstApp').factory('MainService', function ($resource) {
             getBucketlists: {
                 method: 'GET',
                 isArray: true
+            },
+            addBucketlist: {
+                method: 'POST',
             }
         }, {
             stripTrailingSlashes: false

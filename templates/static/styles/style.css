@@ -2,7 +2,7 @@
 
 .btn-join {
     background: transparent;
-    border: 1px solid #536DFE;;
+    border: 1px solid #536DFE;
     margin-top: 20px;
     font-size: 100%;
 }
@@ -154,8 +154,13 @@
 }
 
 .scrollable {
-    overflow-y: auto;
+    overflow: auto;
     padding-top: 70px;
+}
+
+.scrollable-table {
+    height: 120px;
+    overflow: scroll;
 }
 
 .last-thing {
@@ -176,4 +181,14 @@ body {
     border-radius: 4px;
     border: 1px solid #ccd6dd;
     margin: 15px 25px 10px 10px;
+}
+
+.add-bucketlist {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 15px;
+      margin-bottom: 80px;
+      z-index: 900;
 }

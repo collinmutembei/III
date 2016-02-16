@@ -15,12 +15,12 @@
         <link rel="stylesheet" href="{% static 'styles/material.blue-indigo.min.css' %}" />
         <link rel="stylesheet" href="{% static 'styles/bootstrap-editable.css' %}" />
         <link type="text/css" rel="stylesheet" href="{% static 'styles/style.css' %}"/>
+        <script src="{% static 'scripts/jquery.min.js' %}"></script>
     </head>
     <body class="app_background" ng-controller="MainController">
         {% block content %}
 
         {% endblock %}
-        <script src="{% static 'scripts/jquery.min.js' %}"></script>
         <script src="{% static 'scripts/bootstrap.min.js' %}" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{% static 'scripts/material.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'scripts/moment.min.js' %}"></script>

@@ -68,7 +68,7 @@
                                             <th>Last modified</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="scrollable">
+                                    <tbody class="scrollable-table">
                                         <tr ng-repeat="item in bucketlist.items | filter : item.done === true">
                                             <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
                                             <td >{{ item.date_modified | amCalendar }}</td>
@@ -84,7 +84,7 @@
                                             <th>Last modified</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="scrollable">
+                                    <tbody class="scrollable-table">
                                         <tr ng-repeat="item in bucketlist.items | filter : item.done !== true">
                                             <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
                                             <td >{{ item.date_modified | amCalendar }}</td>
@@ -104,5 +104,34 @@
             </div>
         </div>
     </div>
+</div>
+
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast add-bucketlist" data-toggle="modal" data-target="#addBucketlistModal">
+    <i class="material-icons">add</i>
+</button>
+
+<div class="modal fade" id="addBucketlistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><center>create bucketlist</center></h4>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-6">
+                  <form name="bucketlistForm" >
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="bucketlist name" ng-model="bucketlist.name" required>
+                          <span class="input-group-btn">
+                              <button class="btn btn-default btn-primary" type="submit" ng-disabled="bucketlistForm.$invalid" ng-click="add_bucketlist()" data-dismiss="modal">Save</button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -12,7 +12,7 @@ class UserProfile(models.Model):
 class Bucketlist(models.Model):
     """Bucketlist model"""
 
-    name = models.CharField(blank=False, max_length=45)
+    name = models.CharField(blank=False, max_length=45, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -24,7 +24,7 @@ class Bucketlist(models.Model):
 class Item(models.Model):
     """Items model"""
 
-    name = models.CharField(blank=False, max_length=45)
+    name = models.CharField(blank=False, max_length=45, unique=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     done = models.BooleanField(default=False)
