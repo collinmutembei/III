@@ -183,12 +183,10 @@
               <div class="col-lg-12">
                   <form name="itemForm" >
                       <div class="input-group">
-                          {% verbatim %}
                           <input type="text" ng-model="parentbucketlist"  class="parent-bucketlist">
-                          {% endverbatim %}
                           <input type="text" class="form-control" placeholder="item name" ng-model="item.name">
                           <span class="input-group-btn">
-                              <button class="btn btn-default btn-primary toast" ng-disabled="itemForm.$invalid" data-dismiss="modal" ng-click="add_item({parent_bucketlist:parentbucketlist.id, name:item.name})">Save</button>
+                              <button class="btn btn-default btn-primary toast" data-dismiss="modal" ng-click="add_item({parent_bucketlist:parentbucketlist.id, name:item.name})" ng-disabled="!(item.name)">Save</button>
                           </span>
                       </div>
                   </form>

@@ -72,6 +72,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
         MainService.bucketlist_items.addItem(itemparams).
         $promise.
         then(function(result){
+            $scope.item = {}
             $scope.$emit('bucketlistChange');
         }).
         catch(function(response){

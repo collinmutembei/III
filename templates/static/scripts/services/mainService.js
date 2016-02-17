@@ -19,6 +19,8 @@ angular.module('blstApp').factory('MainService', function ($resource) {
             updateBucketlist: {
                 method: 'PUT'
             }
+        }, {
+            stripTrailingSlashes: false
         }),
         bucketlist_items: $resource('/api/bucketlists/:bid/items/', {bid:'@parent_bucketlist'}, {
             getItems: {
