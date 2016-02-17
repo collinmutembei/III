@@ -6,7 +6,7 @@ angular.module('blstApp').factory('MainService', function ($resource) {
                 isArray: true
             },
             addBucketlist: {
-                method: 'POST',
+                method: 'POST'
             }
         }, {
             stripTrailingSlashes: false
@@ -19,6 +19,17 @@ angular.module('blstApp').factory('MainService', function ($resource) {
             updateBucketlist: {
                 method: 'PUT'
             }
-        })
+        }),
+        bucketlist_items: $resource('/api/bucketlists/:bid/items/', {bid:'@parent_bucketlist'}, {
+            getItems: {
+                method: 'GET',
+                isArray: false
+            },
+            addItem: {
+                method: 'POST'
+            }
+        }, {
+            stripTrailingSlashes: false
+        }),
     };
 });

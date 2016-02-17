@@ -24,4 +24,8 @@ $(document).ready(function(){
     $("#editBucketlistModal").on('shown.bs.modal', function(){
         $(this).find('input[type="text"]').focus();
     });
+
+    $("#addItemModal").on('shown.bs.modal', function(){
+        $(this).find('input[type="text"]').focus();
+    });
 });

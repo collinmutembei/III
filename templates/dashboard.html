@@ -50,7 +50,7 @@
                 </div>
                 <div class="back">
                     <div class="header">
-                        <button class="mdl-button mdl-js-button mdl-button--icon pull-right item-add">
+                        <button class="mdl-button mdl-js-button mdl-button--icon pull-right item-add" data-toggle="modal" data-target="#addItemModal" ng-click="showItemModal(bucketlist.id)">
                             <i class="material-icons">add</i>
                         </button>
                         <h5 class="items-title">Bucketlist items</h5>
@@ -156,7 +156,7 @@
               <div class="col-lg-12">
                   <form name="updatebucketlistForm" >
                       <div class="input-group">
-                          <input type="text" class="form-control" placeholder="bucketlist name" ng-model="editbucketlist.name"  autofocus>
+                          <input type="text" class="form-control" placeholder="bucketlist name" ng-model="editbucketlist.name">
                           <span class="input-group-btn">
                               <button class="btn btn-default btn-primary toast" ng-disabled="updatebucketlistForm.$invalid" ng-click="update_bucketlist({id:editbucketlist.id, name:editbucketlist.name})" data-dismiss="modal">Save</button>
                           </span>
@@ -168,6 +168,37 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalitemLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% verbatim %}
+        <h4 class="modal-title" id="myModalitemLabel"><center>{{ state }} item</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <form name="itemForm" >
+                      <div class="input-group">
+                          {% verbatim %}
+                          <input type="text" ng-model="parentbucketlist"  class="parent-bucketlist">
+                          {% endverbatim %}
+                          <input type="text" class="form-control" placeholder="item name" ng-model="item.name">
+                          <span class="input-group-btn">
+                              <button class="btn btn-default btn-primary toast" ng-disabled="itemForm.$invalid" data-dismiss="modal" ng-click="add_item({parent_bucketlist:parentbucketlist.id, name:item.name})">Save</button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
   <div class="mdl-snackbar__text text-center"></div>
   <button class="mdl-snackbar__action" type="button"></button>

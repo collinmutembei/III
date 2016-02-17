@@ -197,3 +197,7 @@ body {
     bottom: -15px;
     left: -5px;
 }
+
+.parent-bucketlist {
+    display: none;
+}

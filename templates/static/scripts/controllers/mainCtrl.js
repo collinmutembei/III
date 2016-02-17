@@ -43,7 +43,6 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
     }
 
     $scope.update_bucketlist = function(params){
-
         MainService.single_bucketlist.updateBucketlist(params).
         $promise.
         then(function(result){
@@ -53,5 +52,30 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
             console.log("failed to update bucketlist");
         });
 
+    }
+
+    $scope.showItemModal = function(parent_id) {
+        $rootScope.state = "add"
+        $scope.parentbucketlist = {}
+
+        MainService.single_bucketlist.getBucketlist({id:parent_id}).
+        $promise.
+        then(function(result){
+            $scope.parentbucketlist = result;
+        }).
+        catch(function(response){
+            console.log("failed to get bucketlist");
+        })
+    }
+
+    $scope.add_item = function(itemparams){
+        MainService.bucketlist_items.addItem(itemparams).
+        $promise.
+        then(function(result){
+            $scope.$emit('bucketlistChange');
+        }).
+        catch(function(response){
+            console.log("failed to add item");
+        });
     }
 });
