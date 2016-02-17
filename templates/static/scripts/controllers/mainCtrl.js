@@ -1,23 +1,57 @@
-angular.module('blstApp').controller("MainController", function($scope, MainService){
+angular.module('blstApp').controller("MainController", function($rootScope, $scope, MainService){
     $scope.bucketlists = MainService.bucketlists.getBucketlists();
 
-    $scope.$on('updateBucketlist', function () {
+    $scope.$on('bucketlistChange', function () {
         $scope.bucketlists = MainService.bucketlists.getBucketlists();
     });
+
     $scope.add_bucketlist = function(){
+
+        $scope.state = "create"
+
         bucketlist = {
             name: $scope.bucketlist.name
         }
         MainService.bucketlists.addBucketlist(bucketlist).
         $promise.
         then(function(result){
-            $scope.add_bucketlist_message = "bucketlist created"
-            $scope.$emit('updateBucketlist');
+            $scope.$emit('bucketlistChange');
             $scope.bucketlist = {}
         }).
         catch(function(response){
-            $scope.add_bucketlist_message = "bucketlist not created"
-            console.log($scope.bucketlist)
+            console.log("failed to add bucketlist");
         })
+    }
+
+    $scope.showCreateModal = function () {
+        $rootScope.state = "create"
+    }
+
+    $scope.showEditModal = function (bid) {
+
+        $rootScope.state = "update"
+
+        $scope.editbucketlist = {}
+        MainService.single_bucketlist.getBucketlist({id:bid}).
+        $promise.
+        then(function(result){
+            $scope.editbucketlist = result;
+        }).
+        catch(function(response){
+            console.log("failed to get bucketlist");
+        })
+    }
+
+    $scope.update_bucketlist = function(params){
+
+        MainService.single_bucketlist.updateBucketlist(params).
+        $promise.
+        then(function(result){
+            $scope.$emit('bucketlistChange');
+        }).
+        catch(function(response){
+            console.log("failed to update bucketlist");
+        });
+
     }
 });

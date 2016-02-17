@@ -16,18 +16,12 @@ function rotateCard(btn){
     }
 }
 
-$(document).ready(function() {
-    $.fn.editable.defaults.mode = 'inline';
-    $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
-
-    $('#title').editable({
-        type: 'text',
-        url: '/api/bucketlists/',
-        toggle:'manual'
+$(document).ready(function(){
+    $("#addBucketlistModal").on('shown.bs.modal', function(){
+        $(this).find('input[type="text"]').focus();
     });
 
-    $('.edit-title').click(function(e){
-        e.stopPropagation();
-        $('#title').editable('toggle');
+    $("#editBucketlistModal").on('shown.bs.modal', function(){
+        $(this).find('input[type="text"]').focus();
     });
 });

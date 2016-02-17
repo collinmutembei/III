@@ -10,6 +10,15 @@ angular.module('blstApp').factory('MainService', function ($resource) {
             }
         }, {
             stripTrailingSlashes: false
+        }),
+        single_bucketlist: $resource('/api/bucketlists/:id/', {id:'@id'}, {
+            getBucketlist: {
+                method: 'GET',
+                isArray: false
+            },
+            updateBucketlist: {
+                method: 'PUT'
+            }
         })
     };
 });

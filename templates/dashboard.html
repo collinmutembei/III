@@ -19,7 +19,7 @@
     </div>
 </nav>
 <div class="container scrollable">
-    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="bucketlist in bucketlists">
+    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="bucketlist in bucketlists | orderBy: '-date_modified' ">
         <div class="card-container manual-flip">
             <div class="card">
                 <div class="front">
@@ -29,8 +29,7 @@
                             <i class="material-icons">more_vert</i>
                         </button>
                         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="{{$index}}">
-                            <li class="mdl-menu__item editable editable-click edit-title">Edit</li>
-                            <li class="mdl-menu__item">Share</li>
+                            <li class="mdl-menu__item" ng-click="showEditModal(bucketlist.id)" data-toggle="modal" data-target="#editBucketlistModal">Edit</li>
                             <li class="mdl-menu__item">Delete</li>
                         </ul>
                         {% endverbatim %}
@@ -38,7 +37,7 @@
                     </div>
                     <div class="bucketlist-title text-center">
                         {% verbatim %}
-                        <span id="title" data-pk="{{ bucketlist.id }}">{{ bucketlist.name }}</span>
+                        <span>{{ bucketlist.name }}</span>
                         {% endverbatim %}
                     </div>
                     <div class="footer">
@@ -106,7 +105,7 @@
     </div>
 </div>
 
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast add-bucketlist" data-toggle="modal" data-target="#addBucketlistModal">
+<button ng-click="showCreateModal()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast add-bucketlist" data-toggle="modal" data-target="#addBucketlistModal">
     <i class="material-icons">add</i>
 </button>
 
@@ -115,16 +114,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><center>create bucketlist</center></h4>
+        {% verbatim %}
+        <h4 class="modal-title" id="myModalLabel"><center>{{ state }} bucketlist</center></h4>
+        {% endverbatim %}
       </div>
       <div class="modal-body">
           <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                   <form name="bucketlistForm" >
                       <div class="input-group">
                           <input type="text" class="form-control" placeholder="bucketlist name" ng-model="bucketlist.name" required>
                           <span class="input-group-btn">
-                              <button class="btn btn-default btn-primary" type="submit" ng-disabled="bucketlistForm.$invalid" ng-click="add_bucketlist()" data-dismiss="modal">Save</button>
+                              <button class="btn btn-default btn-primary" ng-disabled="bucketlistForm.$invalid" ng-click="add_bucketlist()" data-dismiss="modal">Save</button>
                           </span>
                       </div>
                   </form>
@@ -133,5 +134,36 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="editBucketlistModal" tabindex="-1" role="dialog" aria-labelledby="myModalupdateLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% verbatim %}
+        <h4 class="modal-title" id="myModalupdateLabel"><center>{{ state }} bucketlist</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <form name="updatebucketlistForm" >
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="bucketlist name" ng-model="editbucketlist.name"  autofocus>
+                          <span class="input-group-btn">
+                              <button class="btn btn-default btn-primary toast" ng-disabled="updatebucketlistForm.$invalid" ng-click="update_bucketlist({id:editbucketlist.id, name:editbucketlist.name})" data-dismiss="modal">Save</button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+  <div class="mdl-snackbar__text text-center"></div>
+  <button class="mdl-snackbar__action" type="button"></button>
 </div>
 {% endblock %}
