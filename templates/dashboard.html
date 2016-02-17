@@ -105,9 +105,12 @@
     </div>
 </div>
 
-<button ng-click="showCreateModal()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast add-bucketlist" data-toggle="modal" data-target="#addBucketlistModal">
+<button id="addTooltip" ng-click="showCreateModal()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast add-bucketlist" data-toggle="modal" data-target="#addBucketlistModal">
     <i class="material-icons">add</i>
 </button>
+<div class="mdl-tooltip mdl-tooltip--top" for="addTooltip">
+    create new bucketlist
+</div>
 
 <div class="modal fade" id="addBucketlistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
