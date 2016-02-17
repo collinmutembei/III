@@ -79,4 +79,21 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
             console.log("failed to add item");
         });
     }
+
+    $scope.showDeleteModal = function (bid) {
+
+        $rootScope.state = "delete"
+        $scope.deletebucketlist = bid
+    }
+
+    $scope.delete_bucketlist = function(){
+        MainService.single_bucketlist.deleteBucketlist({id:$scope.deletebucketlist}).
+        $promise.
+        then(function(result){
+            $scope.$emit('bucketlistChange');
+        }).
+        catch(function(response){
+            console.log("failed to delete bucketlist");
+        })
+    }
 });

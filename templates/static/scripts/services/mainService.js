@@ -18,6 +18,9 @@ angular.module('blstApp').factory('MainService', function ($resource) {
             },
             updateBucketlist: {
                 method: 'PUT'
+            },
+            deleteBucketlist: {
+                method: 'DELETE'
             }
         }, {
             stripTrailingSlashes: false

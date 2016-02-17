@@ -30,7 +30,7 @@
                         </button>
                         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="{{$index}}">
                             <li class="mdl-menu__item" ng-click="showEditModal(bucketlist.id)" data-toggle="modal" data-target="#editBucketlistModal">Edit</li>
-                            <li class="mdl-menu__item">Delete</li>
+                            <li class="mdl-menu__item" ng-click="showDeleteModal(bucketlist.id)" data-toggle="modal" data-target="#deleteBucketlistModal">Delete</li>
                         </ul>
                         {% endverbatim %}
                         <img src="{% static 'images/header-image.jpeg' %}" alt="cover-photo"/>
@@ -192,6 +192,23 @@
                   </form>
               </div>
           </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteBucketlistModal" tabindex="-1" role="dialog" aria-labelledby="myModaldeleteLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        {% verbatim %}
+        <h4 class="modal-title" id="myModaldeleteLabel"><center>{{ state }} bucketlist</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-footer">
+          <input type="text" ng-model="deletebucketlist"  class="parent-bucketlist">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-danger" ng-click="delete_bucketlist()" data-dismiss="modal">Delete</button>
       </div>
     </div>
   </div>
