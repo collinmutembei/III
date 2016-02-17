@@ -192,3 +192,8 @@ body {
       margin-bottom: 80px;
       z-index: 900;
 }
+
+.item-add {
+    bottom: -15px;
+    left: -5px;
+}
