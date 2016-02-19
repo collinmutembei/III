@@ -1,10 +1,19 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block content %}
 <nav class="navbar">
     <div class="container">
-        <a class="navbar-brand" href="#">BLST</a>
-        <a class="btn btn-join pull-right mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="/login/twitter"><i class="fa fa-user-plus"></i>&nbsp; enter</a>
+        <img alt="Brand" height="45" class="brand" src="{% static 'images/logo.png' %}">
     </div>
 </nav>
+<div class="container">
+    <div class="row">
+        <div class="slogan">
+            <h1>BLST</h1>
+            <h6>plan your life</h6>
+            <a class="btn btn-join pull-right mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="/login/twitter">login with twitter</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="navbar-header col-xs-6 col-md-6">
-                <img alt="Brand" height="45" src="{% static 'images/logo.png' %}">
+                <img alt="Brand" height="45" class="brand" src="{% static 'images/logo.png' %}">
             </div>
             <div class="dropdown col-xs-6 col-md-6">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle thumbnail profile  pull-right"><img src="{{user.profile.avatar}}"></a>
@@ -29,8 +29,8 @@
                             <i class="material-icons">more_vert</i>
                         </button>
                         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="{{$index}}">
-                            <li class="mdl-menu__item" ng-click="showEditModal(bucketlist.id)" data-toggle="modal" data-target="#editBucketlistModal">Edit</li>
-                            <li class="mdl-menu__item" ng-click="showDeleteModal(bucketlist.id)" data-toggle="modal" data-target="#deleteBucketlistModal">Delete</li>
+                            <li class="mdl-menu__item" ng-click="showEditModal(bucketlist.id)" data-toggle="modal" data-target="#editBucketlistModal">edit</li>
+                            <li class="mdl-menu__item" ng-click="showDeleteModal(bucketlist.id)" data-toggle="modal" data-target="#deleteBucketlistModal">remove</li>
                         </ul>
                         {% endverbatim %}
                         <img src="{% static 'images/header-image.jpeg' %}" alt="cover-photo"/>
@@ -40,13 +40,13 @@
                         <span>{{ bucketlist.name }}</span>
                         {% endverbatim %}
                     </div>
-                    <div class="footer">
+                    <footer class="footer">
                         <button class="btn btn-simple" onclick="rotateCard(this)">
                             {% verbatim %}
-                            Items <span class="badge">{{ bucketlist.items.length }}</span>
+                            items <span class="badge">{{ bucketlist.items.length }}</span>
                             {% endverbatim %}
                         </button>
-                    </div>
+                    </footer>
                 </div>
                 <div class="back">
                     <div class="header">
@@ -63,45 +63,57 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active in" id="incomplete{{$index}}">
-                                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-fixed">
-                                    <thead>
-                                        <tr>
-                                            <th class="mdl-data-table__cell--non-numeric">Name</th>
-                                            <th>Last modified</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="scrollable-table">
-                                        <tr ng-repeat="item in bucketlist.items | filter : item.done === true">
-                                            <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
-                                            <td >{{ item.date_modified | amCalendar }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-scrollable">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>name</th>
+                                                <th>done</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in bucketlist.items | filter : item.done === true" ng-init='id=1'>
+                                                <td class="">{{ id + $index }}</td>
+                                                <td>{{ item.name }}</td>
+                                                <td>
+                                                    <input type="checkbox">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="tab-pane" id="complete{{$index}}">
-                                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp table table-fixed">
-                                    <thead>
-                                        <tr>
-                                            <th class="mdl-data-table__cell--non-numeric">Name</th>
-                                            <th>Last modified</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="scrollable-table">
-                                        <tr ng-repeat="item in bucketlist.items | filter : item.done !== true">
-                                            <td class="mdl-data-table__cell--non-numeric">{{ item.name }}</td>
-                                            <td >{{ item.date_modified | amCalendar }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-scrollable">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>name</th>
+                                                <th>done</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in bucketlist.items | filter : item.done !== true" ng-init='id=1'>
+                                                <td class="">{{ id + $index }}</td>
+                                                <td>{{ item.name }}</td>
+                                                <td>
+                                                    <input type="checkbox">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                     {% endverbatim %}
-                    <div class="footer">
+                    <footer class="footer">
                         <button class="btn btn-simple" onclick="rotateCard(this)" data-original-title="Flip Card">
                             <i class="fa fa-share"></i> Back
                         </button>
-                    </div>
+                    </footer>
                 </div>
             </div>
         </div>
@@ -131,7 +143,7 @@
                       <div class="input-group">
                           <input type="text" class="form-control" placeholder="bucketlist name" ng-model="bucketlist.name" required>
                           <span class="input-group-btn">
-                              <button class="btn btn-default btn-primary" ng-disabled="bucketlistForm.$invalid" ng-click="add_bucketlist()" data-dismiss="modal">Save</button>
+                              <button class="btn btn-default btn-primary" ng-disabled="bucketlistForm.$invalid" ng-click="add_bucketlist()" data-dismiss="modal">create</button>
                           </span>
                       </div>
                   </form>
@@ -158,7 +170,7 @@
                       <div class="input-group">
                           <input type="text" class="form-control" placeholder="bucketlist name" ng-model="editbucketlist.name">
                           <span class="input-group-btn">
-                              <button class="btn btn-default btn-primary toast" ng-disabled="updatebucketlistForm.$invalid" ng-click="update_bucketlist({id:editbucketlist.id, name:editbucketlist.name})" data-dismiss="modal">Save</button>
+                              <button class="btn btn-default btn-primary toast" ng-disabled="updatebucketlistForm.$invalid" ng-click="update_bucketlist({id:editbucketlist.id, name:editbucketlist.name})" data-dismiss="modal">update</button>
                           </span>
                       </div>
                   </form>
@@ -186,7 +198,7 @@
                           <input type="text" ng-model="parentbucketlist"  class="parent-bucketlist">
                           <input type="text" class="form-control" placeholder="item name" ng-model="item.name">
                           <span class="input-group-btn">
-                              <button class="btn btn-default btn-primary toast" data-dismiss="modal" ng-click="add_item({parent_bucketlist:parentbucketlist.id, name:item.name})" ng-disabled="!(item.name)">Save</button>
+                              <button class="btn btn-default btn-primary toast" data-dismiss="modal" ng-click="add_item({parent_bucketlist:parentbucketlist.id, name:item.name})" ng-disabled="!(item.name)">add</button>
                           </span>
                       </div>
                   </form>
@@ -207,8 +219,8 @@
       </div>
       <div class="modal-footer">
           <input type="text" ng-model="deletebucketlist"  class="parent-bucketlist">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-danger" ng-click="delete_bucketlist()" data-dismiss="modal">Delete</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+          <button class="btn btn-danger" ng-click="delete_bucketlist()" data-dismiss="modal">remove</button>
       </div>
     </div>
   </div>

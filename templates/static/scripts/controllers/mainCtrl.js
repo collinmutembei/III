@@ -82,7 +82,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
 
     $scope.showDeleteModal = function (bid) {
 
-        $rootScope.state = "delete"
+        $rootScope.state = "remove"
         $scope.deletebucketlist = bid
     }
 
