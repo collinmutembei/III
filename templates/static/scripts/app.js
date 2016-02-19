@@ -1,4 +1,4 @@
-angular.module('blstApp', ['ngResource', 'angularMoment']);
+angular.module('blstApp', ['ngResource']);
 
 angular.module('blstApp').config(function($httpProvider) {
 

@@ -3,6 +3,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
 
     $scope.$on('bucketlistChange', function () {
         $scope.bucketlists = MainService.bucketlists.getBucketlists();
+        window.location.reload();
     });
 
     $scope.add_bucketlist = function(){
