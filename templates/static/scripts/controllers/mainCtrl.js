@@ -3,7 +3,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
 
     $scope.$on('bucketlistChange', function () {
         $scope.bucketlists = MainService.bucketlists.getBucketlists();
-        window.location.reload();
+        // window.location.reload();
     });
 
     $scope.add_bucketlist = function(){
@@ -21,7 +21,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
         }).
         catch(function(response){
             console.log("failed to add bucketlist");
-        })
+        });
     }
 
     $scope.showCreateModal = function () {
@@ -40,7 +40,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
         }).
         catch(function(response){
             console.log("failed to get bucketlist");
-        })
+        });
     }
 
     $scope.update_bucketlist = function(params){
@@ -66,7 +66,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
         }).
         catch(function(response){
             console.log("failed to get bucketlist");
-        })
+        });
     }
 
     $scope.add_item = function(itemparams){
@@ -81,7 +81,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
         });
     }
 
-    $scope.showDeleteModal = function (bid) {
+    $scope.showDeleteModal = function(bid) {
 
         $rootScope.state = "remove"
         $scope.deletebucketlist = bid
@@ -95,6 +95,20 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
         }).
         catch(function(response){
             console.log("failed to delete bucketlist");
-        })
+        });
+    }
+
+
+    $scope.update_item = function(params){
+        MainService.item.updateItem(params).
+        $promise.
+        then(function(result){
+            console.log("updated item");
+        });
+        }).
+        catch(function(response){
+            console.log("failed to update item");
+        });
+
     }
 });

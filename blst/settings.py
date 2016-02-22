@@ -191,3 +191,5 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details',
     'api.pipeline.get_profile_picture',
 )
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

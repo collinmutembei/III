@@ -67,17 +67,15 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th></th>
                                                 <th>name</th>
                                                 <th>done</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="item in bucketlist.items | filter : item.done === true" ng-init='id=1'>
-                                                <td class="">{{ id + $index }}</td>
+                                            <tr ng-repeat="item in bucketlist.items | filter : item.done === true">
                                                 <td>{{ item.name }}</td>
                                                 <td>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox" ng-model="item.done" ng-false-value="false" ng-true-value="true" ng-change="update_item({parent_bucketlist:bucketlist.id, item_id:item.id, name:item.name, done:item.done})">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -89,17 +87,15 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th></th>
                                                 <th>name</th>
                                                 <th>done</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="item in bucketlist.items | filter : item.done !== true" ng-init='id=1'>
-                                                <td class="">{{ id + $index }}</td>
+                                            <tr ng-repeat="item in bucketlist.items | filter : item.done !== true">
                                                 <td>{{ item.name }}</td>
                                                 <td>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox" ng-model="item.done" ng-false-value="false" ng-true-value="true" ng-change="update_item({parent_bucketlist:bucketlist.id, item_id:item.id, name:item.name,  done:item.done})">
                                                 </td>
                                             </tr>
                                         </tbody>
