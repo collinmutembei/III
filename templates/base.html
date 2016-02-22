@@ -1,0 +1,37 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html ng-app='blstApp'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel='shortcut icon' href="{% static 'images/favicon.ico' %}" type='image/x-icon' />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>BLST</title>
+        <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'styles/material.blue-indigo.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'styles/bootstrap-editable.css' %}" />
+        <link type="text/css" rel="stylesheet" href="{% static 'styles/style.css' %}"/>
+    </head>
+    <body class="app_background" ng-controller="MainController">
+        {% block content %}
+
+        {% endblock %}
+        <script src="{% static 'scripts/libs/jquery.min.js' %}"></script>
+        <script src="{% static 'scripts/libs/bootstrap.min.js' %}" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{% static 'scripts/libs/material.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/libs/angular.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/libs/angular-resource.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/services/mainService.js' %}"></script>
+        <script type="text/javascript" src="{% static 'scripts/controllers/mainCtrl.js' %}"></script>
+    </body>
+    <footer class="last-thing">
+        <div class="container">
+            <p class="text-muted text-center">Made with &#128159; by <a href="https://twitter.com/collinmutembei">Collin</a></p>
+        </div>
+    </footer>
+</html>

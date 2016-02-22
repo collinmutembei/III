@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-header col-xs-6 col-md-6">
+                <img alt="Brand" height="45" class="brand" src="{% static 'images/logo.png' %}">
+            </div>
+            <div class="dropdown col-xs-6 col-md-6">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle thumbnail profile  pull-right"><img src="{{user.profile.avatar}}"></a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container scrollable">
+    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="bucketlist in bucketlists | orderBy: '-date_modified' ">
+        <div class="card-container manual-flip">
+            <div class="card">
+                <div class="front">
+                    <div class="cover">
+                        {% verbatim %}
+                        <button id="{{$index}}" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="{{$index}}">
+                            <li class="mdl-menu__item" ng-click="showEditModal(bucketlist.id)" data-toggle="modal" data-target="#editBucketlistModal">edit</li>
+                            <li class="mdl-menu__item" ng-click="showDeleteModal(bucketlist.id)" data-toggle="modal" data-target="#deleteBucketlistModal">remove</li>
+                        </ul>
+                        {% endverbatim %}
+                        <img src="{% static 'images/header-image.jpeg' %}" alt="cover-photo"/>
+                    </div>
+                    <div class="bucketlist-title text-center">
+                        {% verbatim %}
+                        <span>{{ bucketlist.name }}</span>
+                        {% endverbatim %}
+                    </div>
+                    <footer class="footer">
+                        <button class="btn btn-simple" onclick="rotateCard(this)">
+                            {% verbatim %}
+                            items <span class="badge">{{ bucketlist.items.length }}</span>
+                            {% endverbatim %}
+                        </button>
+                    </footer>
+                </div>
+                <div class="back">
+                    <div class="header">
+                        <button class="mdl-button mdl-js-button mdl-button--icon pull-right item-add" data-toggle="modal" data-target="#addItemModal" ng-click="showItemModal(bucketlist.id)">
+                            <i class="material-icons">add</i>
+                        </button>
+                        <h5 class="items-title">Bucketlist items</h5>
+                    </div>
+                    {% verbatim %}
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#incomplete{{$index}}" data-toggle="tab">incomplete</a></li>
+                            <li role="presentation"><a href="#complete{{$index}}" data-toggle="tab">complete</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active in" id="incomplete{{$index}}">
+                                <div class="table-scrollable">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>name</th>
+                                                <th></th>
+                                                <th>done</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in bucketlist.items | filter : item.done === true">
+                                                <td>{{ item.name }}</td>
+                                                <td>
+                                                    <i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#editItemModal" ng-click="showItemEditModal(item)"></i>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" ng-model="item.done" ng-false-value="false" ng-true-value="true" ng-change="update_item({parent_bucketlist:bucketlist.id, id:item.id, name:item.name, done:item.done})">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="complete{{$index}}">
+                                <div class="table-scrollable">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>name</th>
+                                                <th></th>
+                                                <th>done</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in bucketlist.items | filter : item.done !== true">
+                                                <td>{{ item.name }}</td>
+                                                <td>
+                                                    <i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#editItemModal" ng-click="showItemEditModal(item)"></i>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" ng-model="item.done" ng-false-value="false" ng-true-value="true" ng-change="update_item({parent_bucketlist:bucketlist.id, id:item.id, name:item.name,  done:item.done})">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endverbatim %}
+                    <footer class="footer">
+                        <button class="btn btn-simple" onclick="rotateCard(this)" data-original-title="Flip Card">
+                            <i class="fa fa-share"></i> Back
+                        </button>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="addTooltip" ng-click="showCreateModal()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast add-bucketlist" data-toggle="modal" data-target="#addBucketlistModal">
+    <i class="material-icons">add</i>
+</button>
+<div class="mdl-tooltip mdl-tooltip--top" for="addTooltip">
+    create new bucketlist
+</div>
+
+<div class="modal fade" id="addBucketlistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% verbatim %}
+        <h4 class="modal-title" id="myModalLabel"><center>{{ state }} bucketlist</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <form name="bucketlistForm" >
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="bucketlist name" ng-model="bucketlist.name" required>
+                          <span class="input-group-btn">
+                              <button class="btn btn-default btn-primary" ng-disabled="bucketlistForm.$invalid" ng-click="add_bucketlist()" data-dismiss="modal">create</button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editBucketlistModal" tabindex="-1" role="dialog" aria-labelledby="myModalupdateLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% verbatim %}
+        <h4 class="modal-title" id="myModalupdateLabel"><center>{{ state }} bucketlist</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <form name="updatebucketlistForm" >
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="bucketlist name" ng-model="editbucketlist.name">
+                          <span class="input-group-btn">
+                              <button class="btn btn-default btn-primary toast" ng-disabled="updatebucketlistForm.$invalid" ng-click="update_bucketlist({id:editbucketlist.id, name:editbucketlist.name})" data-dismiss="modal">update</button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalitemLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% verbatim %}
+        <h4 class="modal-title" id="myModalitemLabel"><center>{{ state }} item</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <form name="itemForm" >
+                      <div class="input-group">
+                          <input type="text" ng-model="parentbucketlist"  class="parent-bucketlist">
+                          <input type="text" class="form-control" placeholder="item name" ng-model="item.name">
+                          <span class="input-group-btn">
+                              <button class="btn btn-default btn-primary toast" data-dismiss="modal" ng-click="add_item({parent_bucketlist:parentbucketlist.id, name:item.name})" ng-disabled="!(item.name)">add</button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="myModaledititemLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% verbatim %}
+        <h4 class="modal-title" id="myModaledititemLabel"><center>{{ state }} item</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <form name="itemForm" >
+                      <div class="input-group">
+                          <input type="text" ng-model="parentbucketlist"  class="parent-bucketlist">
+                          <input type="text" class="form-control" placeholder="item name" ng-model="item.name">
+                          <span class="input-group-btn">
+                              <button class="btn btn-default btn-primary toast" data-dismiss="modal" ng-disabled="!(item.name)" ng-click="update_item({parent_bucketlist:bucketlist.id, item_id:item.id, name:item.name,  done:item.done})">update</button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteBucketlistModal" tabindex="-1" role="dialog" aria-labelledby="myModaldeleteLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        {% verbatim %}
+        <h4 class="modal-title" id="myModaldeleteLabel"><center>{{ state }} bucketlist</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-footer">
+          <input type="text" ng-model="deletebucketlist"  class="parent-bucketlist">
+          <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+          <button class="btn btn-danger" ng-click="delete_bucketlist()" data-dismiss="modal">remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+  <div class="mdl-snackbar__text text-center"></div>
+  <button class="mdl-snackbar__action" type="button"></button>
+</div>
+{% endblock %}

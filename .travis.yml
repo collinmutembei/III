@@ -1,0 +1,16 @@
+language: python
+python:
+    - "2.7"
+    - "3.5"
+install: pip install -r requirements.txt
+env:
+  global:
+    - TRAVIS_BUILD=true
+script:
+    - coverage run --append manage.py test
+branches:
+  only:
+      - master
+      - develop
+after_success:
+    - coveralls
