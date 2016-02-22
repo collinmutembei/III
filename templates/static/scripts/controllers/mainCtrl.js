@@ -3,7 +3,7 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
 
     $scope.$on('bucketlistChange', function () {
         $scope.bucketlists = MainService.bucketlists.getBucketlists();
-        // window.location.reload();
+        window.location.reload();
     });
 
     $scope.add_bucketlist = function(){
@@ -98,13 +98,23 @@ angular.module('blstApp').controller("MainController", function($rootScope, $sco
         });
     }
 
+    $scope.showItemEditModal = function(item) {
+        $rootScope.state = "edit"
+        $scope.item = item
+    }
 
     $scope.update_item = function(params){
-        MainService.item.updateItem(params).
+        item = {
+            id: params.id || $scope.item.id,
+            name: params.name || $scope.item.name,
+            done: params.done || $scope.item.done,
+            parent_bucketlist: params.parent_bucketlist || $scope.item.parent_bucketlist
+        }
+        MainService.item.updateItem(item).
         $promise.
         then(function(result){
+            $scope.item = {}
             console.log("updated item");
-        });
         }).
         catch(function(response){
             console.log("failed to update item");

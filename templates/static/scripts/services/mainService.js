@@ -36,7 +36,7 @@ angular.module('blstApp').factory('MainService', function ($resource) {
         }, {
             stripTrailingSlashes: false
         }),
-        item: $resource('/api/bucketlists/:bid/items/:iid/', {bid:'@parent_bucketlist', iid:'@item_id'}, {
+        item: $resource('/api/bucketlists/:bid/items/:iid/', {bid:'@parent_bucketlist', iid:'@id'}, {
             updateItem: {
                 method: 'PUT'
             }

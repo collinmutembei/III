@@ -68,6 +68,7 @@
                                         <thead>
                                             <tr>
                                                 <th>name</th>
+                                                <th></th>
                                                 <th>done</th>
                                             </tr>
                                         </thead>
@@ -75,7 +76,10 @@
                                             <tr ng-repeat="item in bucketlist.items | filter : item.done === true">
                                                 <td>{{ item.name }}</td>
                                                 <td>
-                                                    <input type="checkbox" ng-model="item.done" ng-false-value="false" ng-true-value="true" ng-change="update_item({parent_bucketlist:bucketlist.id, item_id:item.id, name:item.name, done:item.done})">
+                                                    <i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#editItemModal" ng-click="showItemEditModal(item)"></i>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" ng-model="item.done" ng-false-value="false" ng-true-value="true" ng-change="update_item({parent_bucketlist:bucketlist.id, id:item.id, name:item.name, done:item.done})">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -88,6 +92,7 @@
                                         <thead>
                                             <tr>
                                                 <th>name</th>
+                                                <th></th>
                                                 <th>done</th>
                                             </tr>
                                         </thead>
@@ -95,7 +100,10 @@
                                             <tr ng-repeat="item in bucketlist.items | filter : item.done !== true">
                                                 <td>{{ item.name }}</td>
                                                 <td>
-                                                    <input type="checkbox" ng-model="item.done" ng-false-value="false" ng-true-value="true" ng-change="update_item({parent_bucketlist:bucketlist.id, item_id:item.id, name:item.name,  done:item.done})">
+                                                    <i class="fa fa-pencil-square-o" data-toggle="modal" data-target="#editItemModal" ng-click="showItemEditModal(item)"></i>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" ng-model="item.done" ng-false-value="false" ng-true-value="true" ng-change="update_item({parent_bucketlist:bucketlist.id, id:item.id, name:item.name,  done:item.done})">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -195,6 +203,34 @@
                           <input type="text" class="form-control" placeholder="item name" ng-model="item.name">
                           <span class="input-group-btn">
                               <button class="btn btn-default btn-primary toast" data-dismiss="modal" ng-click="add_item({parent_bucketlist:parentbucketlist.id, name:item.name})" ng-disabled="!(item.name)">add</button>
+                          </span>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="myModaledititemLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% verbatim %}
+        <h4 class="modal-title" id="myModaledititemLabel"><center>{{ state }} item</center></h4>
+        {% endverbatim %}
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-lg-12">
+                  <form name="itemForm" >
+                      <div class="input-group">
+                          <input type="text" ng-model="parentbucketlist"  class="parent-bucketlist">
+                          <input type="text" class="form-control" placeholder="item name" ng-model="item.name">
+                          <span class="input-group-btn">
+                              <button class="btn btn-default btn-primary toast" data-dismiss="modal" ng-disabled="!(item.name)" ng-click="update_item({parent_bucketlist:bucketlist.id, item_id:item.id, name:item.name,  done:item.done})">update</button>
                           </span>
                       </div>
                   </form>

@@ -232,7 +232,7 @@ thead {
 
 
 tbody td, thead th {
-    width: 50%;
+    width: 33%;
     float: left;
     text-align: center;
 }
