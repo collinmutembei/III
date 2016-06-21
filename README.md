@@ -25,7 +25,7 @@ $ workon III-env
 
 (III-env)$ python manage.py runserver
 ```
-Alternatively, you can deploy your own instance of BLST on [Heroku](https;//dashboard.heroku.com)
+Alternatively, you can deploy your own instance of BLST on [Heroku](https://dashboard.heroku.com)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/andela-cmutembei/III/tree/develop)
 
