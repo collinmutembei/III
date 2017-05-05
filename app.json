@@ -8,7 +8,7 @@
     "Bucketlist"
   ],
   "website": "https://blst-api.herokuapp.com/",
-  "repository": "https://github.com/andela-cmutembei/III",
+  "repository": "https://github.com/collinmutembei/III",
   "logo": "https://blst-api.herokuapp.com/static/images/logo.png",
   "env": {
     "SECRET": {
