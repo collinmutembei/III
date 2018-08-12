@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, unique=True, related_name='profile')
+    user = models.OneToOneField(
+        User, unique=True, related_name="profile", on_delete=models.CASCADE
+    )
     avatar = models.TextField()
 
 
@@ -29,9 +31,7 @@ class Item(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     done = models.BooleanField(default=False)
     parent_bucketlist = models.ForeignKey(
-        Bucketlist,
-        on_delete=models.CASCADE,
-        related_name="items"
+        Bucketlist, on_delete=models.CASCADE, related_name="items"
     )
 
     def __str__(self):

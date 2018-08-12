@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+raven = "*"
+python-dotenv = "*"
+dj-database-url = "*"
+social-auth-app-django = "*"
+djangorestframework = "*"
+"psycopg2" = "*"
+"psycopg2-binary" = "*"
+drf-extensions = {git = "https://github.com/chibisov/drf-extensions.git"}
+djangorestframework-jwt = "*"
+django-rest-swagger = "*"
+
+[dev-packages]
+ipdb = "*"
+black = "*"
+"zest.releaser" = "*"
+
+[requires]
+python_version = "3.6"

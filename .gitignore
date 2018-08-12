@@ -58,3 +58,9 @@ target/
 
 # coveralls local config
 .coveralls.yml
+
+# pycharm stuff
+.idea
+
+# environment variables
+.env
