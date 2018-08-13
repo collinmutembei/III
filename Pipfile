@@ -10,11 +10,11 @@ python-dotenv = "*"
 dj-database-url = "*"
 social-auth-app-django = "*"
 djangorestframework = "*"
-"psycopg2" = "*"
-"psycopg2-binary" = "*"
 drf-extensions = {git = "https://github.com/chibisov/drf-extensions.git"}
 djangorestframework-jwt = "*"
 django-rest-swagger = "*"
+"psycopg2" = "*"
+bugsnag = "*"
 
 [dev-packages]
 ipdb = "*"

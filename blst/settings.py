@@ -35,7 +35,7 @@ SECRET_KEY = os.getenv("SECRET")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["coll.in"]
+ALLOWED_HOSTS = ["coll.in", "*.herokuapp.com"]
 
 
 # Application definition
@@ -55,6 +55,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # "bugsnag.django.middleware.BugsnagMiddleware",
+
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -130,7 +132,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "templates/static"),)
+STATIC_ROOT = (os.path.join(BASE_DIR, "templates/static"),)
 
 # CSRF_COOKIE_SECURE = True
 
@@ -142,13 +144,22 @@ RAVEN_CONFIG = {
     "release": VERSION,
 }
 
+# BUGSNAG = {
+#     "api_key": os.getenv("BUGSNAG_API_KEY"),
+#     "project_root": BASE_DIR,
+# }
+
 # Settings fof djangorestframework-jwt
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
-    )
+    ),
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework.renderers.JSONRenderer",
+        # "rest_framework.renderers.BrowsableAPIRenderer",
+    ),
 }
 
 JWT_AUTH = {"JWT_EXPIRATION_DELTA": datetime.timedelta(seconds=604800)}
