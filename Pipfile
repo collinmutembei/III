@@ -16,6 +16,8 @@ drf-extensions = "*"
 pip = "*"
 django-heroku = "*"
 "psycopg2-binary" = "*"
+coverage = "*"
+django-nose = "*"
 
 [dev-packages]
 ipdb = "*"
