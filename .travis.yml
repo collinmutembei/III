@@ -1,6 +1,7 @@
 dist: trusty
 sudo: required
 addons:
+  postgresql: "9.6"
   sonarcloud:
     organization: collinmutembei-github
     token:
