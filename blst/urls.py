@@ -1,8 +1,9 @@
-from django.conf.urls import url, include
+from django.urls import path
+from django.conf.urls import include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('api.urls')),
-    url(r'^admin/', admin.site.urls),
-    url('', include('social.apps.django_app.urls', namespace='social')),
+    path('', include('api.urls')),
+    path('admin/', admin.site.urls),
+    path('', include('social_django.urls', namespace='social')),
 ]

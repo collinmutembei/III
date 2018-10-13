@@ -1,5 +1,7 @@
-from django.conf.urls import url, include
+from django.urls import path
+from django.conf.urls import include
 from rest_framework_extensions.routers import ExtendedSimpleRouter
+from rest_framework_jwt.views import obtain_jwt_token
 from api import viewsets
 from api.views import root_route, landing, dashboard, logout
 
@@ -16,14 +18,14 @@ router = ExtendedSimpleRouter()
 )
 
 urlpatterns = [
-    url(r'^$', landing),
-    url(r'^dashboard/', dashboard),
-    url(r'^logout/$', logout),
-    url(r'^api/', include(router.urls)),
-    url(r'^api/$', root_route),
-    url(r'^auth/login/', 'rest_framework_jwt.views.obtain_jwt_token'),
-    url(r'^blst/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^docs/', include('rest_framework_swagger.urls')),
+    path('', landing),
+    path('dashboard/', dashboard),
+    path('logout/', logout),
+    path('api/', include(router.urls)),
+    path('api/', root_route),
+    path('auth/login/', obtain_jwt_token),
+    path('blst/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('docs/', include('rest_framework_swagger.urls')),
 ]
 
-url.handler404 = 'api.views.custom_404'
+path.handler404 = 'api.views.custom_404'

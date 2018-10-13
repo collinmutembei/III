@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, unique=True, related_name='profile')
+    user = models.OneToOneField(User, unique=True, related_name='profile', on_delete=models.PROTECT)
     avatar = models.TextField()
 
 

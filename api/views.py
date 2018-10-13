@@ -22,13 +22,14 @@ def custom_404(request):
 
 
 def landing(request):
-    if request.user.is_authenticated():
+    # import ipdb; ipdb.set_trace()
+    if request.user.is_authenticated:
         return render(request, 'dashboard.html')
     return render(request, 'landing.html')
 
 
 def dashboard(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return render(request, 'dashboard.html')
     return HttpResponseRedirect("/")
 
