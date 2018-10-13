@@ -1,24 +1,24 @@
 dist: trusty
 sudo: required
-
 addons:
   sonarcloud:
-    organization: "sonarcloud"
-
+    organization: collinmutembei-github
+    token:
+      secure: jW+WVkupBmAfHxi+tlH9YyjCtXkvGDGsy0GXv3IzaVlrWS3P8L82n1Jvt5f2acZ4gnggRTGXfPXKBDdWuEcPQzyulsA/eopu8PWs429yI0xATDlZKFTk/QUwleV2rQpKi6cdaY+QcKy9VLArgRXAJMSol1JAXw0TQE495Cv8zB7/+4aSTpiu8/FXfHswO9ToRe8xpQ70/B5yMLhvIvjF5fjN+A6COL37RBiCHl7mw6300Crn7Hvw8ea6FEwOU88B9AFTyIsVZA62moJ2wI5xWqPIxHVGF3QVjXxkiCgl70hexvd10e9hc0osM5Q6W5UxaTLowUk4mXbLY20C75rEF2AAOsV/ejn/uq2k3lwC2d+ySR7O/BMutjLd6DYWxnKAqd6Oz4eNJC40A6PxBpnBC2ZIVKaho1wjjLiBZFwUD8DUHAk+j4eo3IynDrCGiOmaEa4Tg4UP7nlTdtbsRRPZMvnAxktAelZwzkQUtFnowLQxNgxZlnlqeVAia/+kXA6dM2KLIBA7glbsms6K/PssNhTJEwDP7pXGU0xeladO/tj2uISyh5dkK7YiRJoBbJWccdLFQ6+e2Kp4oVDSQkiFycWXdtaiWWcTxZ5XjSyIydGAFiPDrp0kZXBXokdYPvn6DcWAa3N2ZFZHhRbdfmgTmx6XhX7Oh6xn+znFZKyuG+E=
 language: python
 python:
-    - "2.7"
-    - "3.5"
+- '2.7'
+- '3.5'
 install: pip install pipenv && pipenv install
 env:
   global:
-    - TRAVIS_BUILD=true
+    TRAVIS_BUILD=true
 script:
-    - coverage run --append manage.py test
-    - sonar-scanner
+- coverage run --append manage.py test
+- sonar-scanner
 branches:
   only:
-      - master
-      - develop
+  - master
+  - develop
 after_success:
-    - coveralls
+- coveralls
