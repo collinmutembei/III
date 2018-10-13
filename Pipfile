@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+dj-database-url = "*"
+djangorestframework = "*"
+djangorestframework-jwt = "*"
+gunicorn = "*"
+django-rest-swagger = "*"
+python-social-auth = "*"
+rest-social-auth = "*"
+django = "==2.1.1"
+drf-extensions = "*"
+pip = "*"
+django-heroku = "*"
+"psycopg2-binary" = "*"
+coverage = "*"
+django-nose = "*"
+
+[dev-packages]
+ipdb = "*"
+
+[requires]
+python_version = "3.6"
