@@ -9,9 +9,8 @@ language: python
 python:
 - '3.6'
 install: pip install pipenv && pipenv install --skip-lock
-env:
-  global:
-    TRAVIS_BUILD=true
+before_script:
+  - psql -c 'create database iii_test;' -U postgres
 script:
 - coverage run --append manage.py test
 - sonar-scanner
