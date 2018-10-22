@@ -7,10 +7,10 @@ ALLOWED_HOSTS = ['*.herokuapp.com']
 CACHES = {
     'default': {
         'BACKEND': 'django_bmemcached.memcached.BMemcached',
-        'LOCATION': os.environ.get('MEMCACHEDCLOUD_SERVERS').split(','),
+        'LOCATION': os.getenv('MEMCACHIER_SERVERS').split(','),
         'OPTIONS': {
-                'username': os.environ.get('MEMCACHEDCLOUD_USERNAME'),
-                'password': os.environ.get('MEMCACHEDCLOUD_PASSWORD')
+                'username': os.getenv('MEMCACHIER_USERNAME'),
+                'password': os.getenv('MEMCACHIER_PASSWORD')
             }
     }
 }
