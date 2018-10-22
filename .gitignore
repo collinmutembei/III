@@ -67,3 +67,6 @@ target/
 
 # docker compose data volume
 data_*
+
+# VSCode stuff
+.vscode
