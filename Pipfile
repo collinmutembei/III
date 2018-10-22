@@ -14,6 +14,9 @@ gunicorn = "*"
 "psycopg2-binary" = "*"
 drf-extensions = "*"
 djangorestframework-jwt = "*"
+django-heroku = "*"
+python-binary-memcached = "*"
+django-bmemcached = "*"
 
 [dev-packages]
 

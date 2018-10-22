@@ -31,10 +31,10 @@ services:
     ports:
       - 9000:9000
     environment:
-      - SECRET=${SECRET}
+      - SECRET=6l1a9v9pet3^wj=x5okmsn1dr
       - MEMCACHED_SERVER=cache
-      - SENTRY_DSN=${SENTRY_DSN}
       - DATABASE_URL=postgres://postgres:GilgewurgI6@db:5432/plana
+      - APP_ENV=develop
     depends_on:
       - db
       - broker

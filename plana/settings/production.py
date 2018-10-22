@@ -12,13 +12,17 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import datetime
+from logging import config as logconf
+
+from django.utils.log import DEFAULT_LOGGING
 
 import raven
 import dj_database_url
+from plana import VERSION
 from dotenv import load_dotenv, find_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Load environment variables from .env file if present
 load_dotenv(find_dotenv())
@@ -27,12 +31,12 @@ load_dotenv(find_dotenv())
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET", '4@ug-eomx(%%2y*39_e0+$6l1a9v9pet3)6(^wj=x5okmsn1dr')
+SECRET_KEY = os.getenv("SECRET", "4@ug-eo%%2y*39_e0+$6l1a9v9p6(^wj=x5okmsn1dr")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['coll.in', '*.herokuapp.com']
+ALLOWED_HOSTS = ['*.herokuapp.com']
 
 
 # Application definition
@@ -130,10 +134,22 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates/static")]
 
+DEFAULT_FROM_EMAIL = "hello@getplana.io"
+
+SERVER_EMAIL = "hello@getplana.io"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_bmemcached.memcached.BMemcached",
+        "LOCATION": os.getenv("MEMCACHE_SERVER", "0.0.0.0:11211"),
+    }
+}
+
 
 RAVEN_CONFIG = {
-    "dsn": os.getenv("SENTRY_DSN"),
-    "release": raven.fetch_git_sha(BASE_DIR),
+    "dsn": os.getenv("SENTRY_DSN", "https://0f4fbaef8eb440b1be847ca48e4e4f7e:819de7a55edd4fe9b506208f3af1bb64@sentry.io/1260753"),
+    # "release": raven.fetch_git_sha(BASE_DIR), # On heroku, git repo missing
+    "release": VERSION
 }
 
 REST_FRAMEWORK = {
@@ -144,7 +160,6 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_RENDERER_CLASSES": (
         "rest_framework.renderers.JSONRenderer",
-        # "rest_framework.renderers.BrowsableAPIRenderer",
     ),
 }
 
@@ -183,3 +198,43 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = "/"
 
 AUTH_PROFILE_MODULE = "api.UserProfile"
 
+LOGGING_CONFIG = None
+
+LOGLEVEL = os.getenv("LOGLEVEL", "INFO").upper()
+
+logconf.dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "default": {
+                "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"
+            },
+            "django.server": DEFAULT_LOGGING["formatters"]["django.server"],
+        },
+        "handlers": {
+            "console": {"class": "logging.StreamHandler", "formatter": "default"},
+            "sentry": {
+                "level": "WARNING",
+                "class": "raven.contrib.django.raven_compat.handlers.SentryHandler",
+            },
+            "django.server": DEFAULT_LOGGING["handlers"]["django.server"],
+        },
+        "loggers": {
+            "": {"level": "WARNING", "handlers": ["console", "sentry"]},
+            "api": {
+                "level": LOGLEVEL,
+                "handlers": ["console", "sentry"],
+                # Avoid double logging because of root logger
+                "propagate": False,
+            },
+            # Prevent noisy modules from logging to Sentry
+            "noisy_module": {
+                "level": "ERROR",
+                "handlers": ["console"],
+                "propagate": False,
+            },
+            "django.server": DEFAULT_LOGGING["loggers"]["django.server"],
+        },
+    }
+)
