@@ -8,7 +8,7 @@ from api.serializers import BucketlistSerializer, ItemSerializer
 class BucketlistViewset(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Bucketlist.objects.all()
     serializer_class = BucketlistSerializer
-    permission_classes = (IsOwner, permissions.IsAuthenticated,)
+    permission_classes = (IsOwner, permissions.IsAuthenticated)
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
@@ -22,4 +22,4 @@ class BucketlistViewset(NestedViewSetMixin, viewsets.ModelViewSet):
 class ItemViewset(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    permission_classes = (IsOwner, permissions.IsAuthenticated,)
+    permission_classes = (IsOwner, permissions.IsAuthenticated)

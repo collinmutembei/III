@@ -58,3 +58,15 @@ target/
 
 # coveralls local config
 .coveralls.yml
+
+# pycharm stuff
+.idea
+
+# environment variables
+.env
+
+# docker compose data volume
+data_*
+
+# VSCode stuff
+.vscode

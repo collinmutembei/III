@@ -1,0 +1,43 @@
+version: '3.6'
+
+services:
+  db:
+    container_name: plana_postgres
+    image: postgres:10.1-alpine
+    environment:
+      - POSTGRES_DB=plana
+      - POSTGRES_PASSWORD=GilgewurgI6
+    ports:
+      - 5432:5432
+    volumes:
+      - data_db:/var/lib/postgresql/data/
+  broker:
+    container_name: plana_redis
+    image: redis:4.0-alpine
+    ports:
+      - 6379:6379
+  cache:
+    container_name: plana_memcached
+    image: memcached:1.5-alpine
+    ports:
+      - 11211:11211
+  web:
+    container_name: plana_web
+    restart: unless-stopped
+    build: .
+    command: sh -c "python3 manage.py migrate --noinput && python3 manage.py runserver 0.0.0.0:9000"
+    volumes:
+      - .:/BLST
+    ports:
+      - 9000:9000
+    environment:
+      - SECRET=6l1a9v9pet3^wj=x5okmsn1dr
+      - MEMCACHED_SERVER=cache
+      - DATABASE_URL=postgres://postgres:GilgewurgI6@db:5432/plana
+      - APP_ENV=develop
+    depends_on:
+      - db
+      - broker
+      - cache
+volumes:
+  data_db:

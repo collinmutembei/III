@@ -4,23 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-dj-database-url = "*"
-djangorestframework = "*"
-djangorestframework-jwt = "*"
-gunicorn = "*"
-django-rest-swagger = "*"
-python-social-auth = "*"
-rest-social-auth = "*"
-drf-extensions = "*"
-pip = "*"
-django-heroku = "*"
-"psycopg2-binary" = "*"
-coverage = "*"
-django-nose = "*"
 django = "*"
+dj-database-url = "*"
+social-auth-app-django = "*"
+djangorestframework = "*"
+raven = "*"
+python-dotenv = "*"
+gunicorn = "*"
+"psycopg2-binary" = "*"
+drf-extensions = "*"
+djangorestframework-jwt = "*"
+django-heroku = "*"
+python-binary-memcached = "*"
+django-bmemcached = "*"
 
 [dev-packages]
-ipdb = "*"
 
 [requires]
 python_version = "3.6"

@@ -6,31 +6,26 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 
 
-@api_view(('GET',))
+@api_view(("GET",))
 def root_route(request, format=None):
-    return Response({
-        'bucketlists': reverse(
-            'bucketlist-list',
-            request=request,
-            format=format
-        ),
-    })
+    return Response(
+        {"bucketlists": reverse("bucketlist-list", request=request, format=format)}
+    )
 
 
 def custom_404(request):
-    return render(request, '404.html')
+    return render(request, "404.html")
 
 
 def landing(request):
-    # import ipdb; ipdb.set_trace()
     if request.user.is_authenticated:
-        return render(request, 'dashboard.html')
-    return render(request, 'landing.html')
+        return render(request, "dashboard.html")
+    return render(request, "landing.html")
 
 
 def dashboard(request):
     if request.user.is_authenticated:
-        return render(request, 'dashboard.html')
+        return render(request, "dashboard.html")
     return HttpResponseRedirect("/")
 
 
