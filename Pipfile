@@ -5,21 +5,17 @@ name = "pypi"
 
 [packages]
 django = "*"
-raven = "*"
-python-dotenv = "*"
 dj-database-url = "*"
 social-auth-app-django = "*"
 djangorestframework = "*"
-drf-extensions = {git = "https://github.com/chibisov/drf-extensions.git"}
+raven = "*"
+python-dotenv = "*"
+gunicorn = "*"
+"psycopg2-binary" = "*"
+drf-extensions = "*"
 djangorestframework-jwt = "*"
-django-rest-swagger = "*"
-"psycopg2" = "*"
-bugsnag = "*"
 
 [dev-packages]
-ipdb = "*"
-black = "*"
-"zest.releaser" = "*"
 
 [requires]
 python_version = "3.6"

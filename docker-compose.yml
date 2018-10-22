@@ -2,48 +2,42 @@ version: '3.6'
 
 services:
   db:
-    restart: unless-stopped
-    image: postgres:9.6-alpine
-    volumes:
-      - ./compose/db/:/docker-entrypoint-initdb.d/
+    container_name: plana_postgres
+    image: postgres:10.1-alpine
+    environment:
+      - POSTGRES_DB=plana
+      - POSTGRES_PASSWORD=GilgewurgI6
     ports:
       - 5432:5432
-    networks:
-      - db-network
-  broker:
-    restart: unless-stopped
-    image: redis:4.0-alpine
     volumes:
-      - redis_data:/var/lib/redis/data/
+      - data_db:/var/lib/postgresql/data/
+  broker:
+    container_name: plana_redis
+    image: redis:4.0-alpine
     ports:
       - 6379:6379
-    networks:
-      - broker-network
+  cache:
+    container_name: plana_memcached
+    image: memcached:1.5-alpine
+    ports:
+      - 11211:11211
   web:
+    container_name: plana_web
     restart: unless-stopped
     build: .
-    command: >
-      sh -c "python3 manage.py migrate --no-input
-      && python3 runserver 0.0.0.0:9000"
+    command: sh -c "python3 manage.py migrate --noinput && python3 manage.py runserver 0.0.0.0:9000"
     volumes:
       - .:/BLST
     ports:
       - 9000:9000
-    networks:
-      - db-network
-      - broker-network
     environment:
-      - DB_HOST=db
       - SECRET=${SECRET}
-      - DATABASE_URL=postgres://${DB_USER}:${DB_USER_PASSWORD}@${DB_HOST}/blst
-      - SOCIAL_AUTH_TWITTER_KEY=${SOCIAL_AUTH_TWITTER_KEY}
-      - SOCIAL_AUTH_TWITTER_SECRET=${SOCIAL_AUTH_TWITTER_SECRET}
+      - MEMCACHED_SERVER=cache
       - SENTRY_DSN=${SENTRY_DSN}
+      - DATABASE_URL=postgres://postgres:GilgewurgI6@db:5432/plana
     depends_on:
       - db
       - broker
+      - cache
 volumes:
-  redis_data:
-networks:
-  db-network:
-  broker-network:
+  data_db:

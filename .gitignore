@@ -64,3 +64,6 @@ target/
 
 # environment variables
 .env
+
+# docker compose data volume
+data_*

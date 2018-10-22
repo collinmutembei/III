@@ -9,9 +9,10 @@ RUN apk add --no-cache libpq git
 WORKDIR /BLST
 
 COPY ./Pipfile /BLST/Pipfile
+COPY ./Pipfile.lock /BLST/Pipfile.lock
 RUN pip install --upgrade pip
 RUN pip install pipenv
-RUN pipenv install --deploy --system --skip-lock --dev
+RUN pipenv install --system --deploy
 
 
 COPY . /BLST/

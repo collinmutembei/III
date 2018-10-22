@@ -1,6 +1,6 @@
 CREATE DATABASE blst;
-CREATE USER blstuser WITH PASSWORD 'DaumGilgewurgI6';
-ALTER ROLE blstuser SET client_encoding TO 'utf8';
-ALTER ROLE blstuser SET default_transaction_isolation TO 'read committed';
-ALTER ROLE blstuser SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE blst TO blstuser;
+CREATE USER blst WITH PASSWORD 'DaumGilgewurgI6';
+ALTER ROLE blst SET client_encoding TO 'utf8';
+ALTER ROLE blst SET default_transaction_isolation TO 'read committed';
+ALTER ROLE blst SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE blst TO blst;
