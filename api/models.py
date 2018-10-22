@@ -10,6 +10,9 @@ class UserProfile(models.Model):
     )
     avatar = models.TextField()
 
+    def __str__(self):
+        return "<UserProfile for User with id {user_id}".format(user_id=self.user.id)
+
 
 class Bucketlist(models.Model):
     """Bucketlist model"""
