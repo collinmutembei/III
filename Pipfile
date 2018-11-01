@@ -19,6 +19,7 @@ python-binary-memcached = "*"
 django-bmemcached = "*"
 
 [dev-packages]
+coverage = "*"
 
 [requires]
 python_version = "3.6"
